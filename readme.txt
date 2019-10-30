@@ -9,7 +9,7 @@ SSD硬碟:480G 二顆以上(做RAID 陣列用)
 
 (一)伺服器系統安裝及設定
 下載CentOS 7 x86_64-Minimal 的ISO
-ftp://drbl.nchc.org.tw/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1810.iso
+ftp://drbl.nchc.org.tw/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1903.iso
 
 使用最小安裝即可
 ###設定固定IP 外網:163.23.xxx.xxx 內網:192.168.10.254
@@ -271,6 +271,10 @@ reboot
 #HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Memory Management\ExistingPageFiles
 #以上二個修改為空字串
 
+###如用vhdx安裝 Windows 10 要在以下值設定為4
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\FsDepends\Parameters\VirtualDiskExpandOnMount
+
+
 #diskpart
 #list disk
 #select disk z (where z is the number corresponding for your USB disk. You have to replace it with the corresponding letter from your own system).
@@ -425,3 +429,5 @@ DISKPART>create vdisk file=C:\vhdos\win10x64_st.vhd parent=C:\vhdos\win10x64.vhd
 C:\>diskpart
 select vdisk file=C:\vhdos\win10x64_st.vhd
 merge vdisk depth=1
+
+

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if [ -f /home/acfs/tftpboot/mac.txt ]; then
+
 targetcli clearconfig confirm=True
 
 LVREMOVE_ST=$(/bin/ls /dev/vg_iscsi/lv_st*)
@@ -124,3 +126,7 @@ done
 service dhcpd restart
 service target restart
 
+else
+clear
+echo "沒有 /home/acfs/tftpboot/mac.txt 檔,無法執行"
+fi
