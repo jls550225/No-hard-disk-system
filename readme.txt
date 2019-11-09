@@ -21,6 +21,7 @@ ping 168.95.1.1
 #安裝所需套件
 yum -y install epel-release
 yum -y update
+#yum -y install ftp://drbl.nchc.org.tw/drbl-core/x86_64/RPMS.drbl-unstable/drbl-2.30.20-drbl1.noarch.rpm
 yum -y install net-tools fuse-sshfs zip unzip cups dialog mtools mdadm ntfs-3g ntfsprogs
 yum -y install ntsysv ntp vim man nmap rp-pppoe gcc wget make iptstate iptraf iptables-devel gpm
 yum -y install yum-utils rpcbind tftp-server tftp telnet ftp rsync mailx nfs-utils xinetd
@@ -405,29 +406,30 @@ cat >> /etc/rc.d/rc.local << EOF
 EOF
 chmod 700 /etc/rc.d/rc.local
 
-###於 CentOS 7 中實作差異硬碟 (Differential VHD)，之後改開機至「差異硬碟 win10x64_st.vhd」
+###於 CentOS 7 中實作差異硬碟 (Differential VHD)，之後改開機至「差異硬碟 win10x64_st.vhdx」
 git clone https://github.com/NuxRo/vhd-util /opt/vhd-util
-### 建立 win10x64_st.vhd 快照
-/opt/vhd-util/vhd-util.sh snapshot -n win10x64_st.vhd  -p win10x64.vhd
-### 將 win10x64_st.vhd 合併回 win10x64.vhd
-/opt/vhd-util/vhd-util.sh  coalesce -n win10x64_st.vhd
+### 建立 win10x64_st.vhdx 快照
+/opt/vhd-util/vhd-util.sh snapshot -n win10x64_st.vhdx  -p win10x64.vhdx
+### 將 win10x64_st.vhdx 合併回 win10x64.vhdx
+/opt/vhd-util/vhd-util.sh  coalesce -n win10x64_st.vhdx
 
 ###開一個100G 的 VHDX 檔 type=expandable (動態擴展) type=fixed (固定容量)
 C:\>diskpart
-create vdisk file=d:\vhdos\test.vhdx maximum=102400 type=expandable
+create vdisk file=d:\vhdos\win10x64.vhdx maximum=102400 type=expandable
 
 ###VHD擴充 50G
 C:\>diskpart
-select vdisk file=C:\vhdos\win10x64.vhd
+select vdisk file=C:\vhdos\win10x64.vhdx
 expand vdisk maximum=51200
 
-###於 Windows 中實作差異硬碟 (Differential VHD)，之後改開機至「差異硬碟 win10x64_st.vhd」
+###於 Windows 中實作差異硬碟 (Differential VHD)，之後改開機至「差異硬碟 win10x64_st.vhdx」
 C:\>diskpart
-DISKPART>create vdisk file=C:\vhdos\win10x64_st.vhd parent=C:\vhdos\win10x64.vhd
+DISKPART>create vdisk file=C:\vhdos\win10x64_st.vhdx parent=C:\vhdos\win10x64.vhdx
+DISKPART>create vdisk file=C:\vhdos\win10x64_rcst.vhdx parent=C:\vhdos\win10x64.vhdx
 
 ###於 Windows 中實作差異硬碟合併(父系、子系)
 C:\>diskpart
-select vdisk file=C:\vhdos\win10x64_st.vhd
+select vdisk file=C:\vhdos\win10x64_st.vhdx
 merge vdisk depth=1
 
 
