@@ -1,4 +1,4 @@
-1.伺服器配備:
+﻿1.伺服器配備:
 CPU : i5 以上
 RAM : 8G 以上
 硬碟: 500 G 一顆(安裝 Linux 系統用)
@@ -9,7 +9,7 @@ SSD硬碟:480G 二顆以上(做RAID 陣列用)
 
 (一)伺服器系統安裝及設定
 下載CentOS 7 x86_64-Minimal 的ISO
-ftp://drbl.nchc.org.tw/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1903.iso
+ftp://drbl.nchc.org.tw/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso
 
 使用最小安裝即可
 ###設定固定IP 外網:163.23.xxx.xxx 內網:192.168.10.254
