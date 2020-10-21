@@ -157,7 +157,7 @@ cat > /etc/dhcp/dhcpd.conf << EOF
 # http://www.ipxe.org/howto/dhcpd
 #
 # Generating iPXE build image ROM 
-#https://rom-o-matic.eu
+#https://rom-o-matic.dev
 #
 #ipxe source download
 #git clone git://git.ipxe.org/ipxe.git
